@@ -1,0 +1,20 @@
+{
+  "name": "persianify",
+  "version": "1.0.0",
+  "description": "Lets you automate fixing of common Persian text issues, usually made with non-standard keyboards.",
+  "author": "Ali Afghah",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2"
+  }
+}
