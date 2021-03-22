@@ -73,77 +73,58 @@ export default {
       text = text.replace(/\n/g, "<br />");
 
       if (this.arabicLetters === true) {
-        text = text.replace(/ي/g, "ی");
-        text = text.replace(/ك/g, "ک");
-        this.persianTextCorrected = text;
+        text = text.replace(/ي/g, "ی").replace(/ك/g, "ک");
       }
 
       if (this.arabicNumbers === true) {
-        text = text.replace(/٤/g, "۴");
-        text = text.replace(/٥/g, "۵");
-        text = text.replace(/٦/g, "۶");
-        this.persianTextCorrected = text;
+        text = text
+          .replace(/٤/g, "۴")
+          .replace(/٥/g, "۵")
+          .replace(/٦/g, "۶");
       }
 
       if (this.englishNumbers === true) {
-        text = text.replace(/1/g, "۱");
-        text = text.replace(/2/g, "۲");
-        text = text.replace(/3/g, "۳");
-        text = text.replace(/4/g, "۴");
-        text = text.replace(/5/g, "۵");
-        text = text.replace(/6/g, "۶");
-        text = text.replace(/7/g, "۷");
-        text = text.replace(/8/g, "۸");
-        text = text.replace(/9/g, "۹");
-        text = text.replace(/0/g, "۰");
-        this.persianTextCorrected = text;
+        text = text
+          .replace(/1/g, "۱")
+          .replace(/2/g, "۲")
+          .replace(/3/g, "۳")
+          .replace(/4/g, "۴")
+          .replace(/5/g, "۵")
+          .replace(/6/g, "۶")
+          .replace(/7/g, "۷")
+          .replace(/8/g, "۸")
+          .replace(/9/g, "۹")
+          .replace(/0/g, "۰");
       }
 
       if (this.englishPunctuation === true) {
-        text = text.replace(/\?/g, "؟");
-        text = text.replace(/\,/g, "،");
-        text = text.replace(/ \"/g, "«");
-        text = text.replace(/\" /g, "» ");
-        text = text.replace(/\"/g, "»");
-        text = text.replace(/\"\S/g, x => {
-          return "»" + x.replace('"', "");
-        });
+        text = text
+          .replace(/\?/g, "؟")
+          .replace(/\,/g, "،")
+          .replace(/ \"/g, "«")
+          .replace(/\" /g, "» ")
+          .replace(/\"/g, "»")
+          .replace(/\"\S/g, x => "»" + x.replace('"', ""));
       }
 
       if (this.punctuationSpace === true) {
-        text = text.replace(/ \،/g, "،");
-        text = text.replace(/ \./g, ".");
-        text = text.replace(/ \!/g, "!");
-        text = text.replace(/ \؟/g, "؟");
+        text = text
+          .replace(/ \،/g, "،")
+          .replace(/ \./g, ".")
+          .replace(/ \!/g, "!")
+          .replace(/ \؟/g, "؟");
       }
 
       if (this.extraSpace === true) {
-        text = text.replace(/. ./g, x => {
-          return x.replace("  ", " ");
-        });
+        text = text.replace(/.\s{2,}./g, x => x.replace(/\s+/, " "));
       }
 
       this.persianTextCorrected = text;
     }
   },
-  computed: {
-    all() {
-      return (
-        this.persianText,
-        this.arabicLetters,
-        this.arabicNumbers,
-        this.englishNumbers,
-        this.englishPunctuation,
-        this.punctuationSpace,
-        this.extraSpace,
-        Date.now()
-      );
-    }
-  },
-  watch: {
-    all() {
-      this.replace();
-    }
+  updated() {
+    this.replace();
   }
 };
 </script>
+
